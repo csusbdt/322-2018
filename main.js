@@ -10,8 +10,6 @@
     h: 12
   };
 
-  let rectx = 0;
-
   function anim() {
     box.x += 3;
     if (box.x > canvas.width) box.x = 0;
