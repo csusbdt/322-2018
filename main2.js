@@ -9,12 +9,13 @@ TODO: create 2 or more boxes whose colors can be individually toggled.
   let ctx    = canvas.getContext('2d');
 
   box = {
-     x    :  0 ,
-     y    : 50 ,
-     w    : 80 ,
-     h    : 32 ,
-    dx    :  2 ,
-    color : '#ff0000'
+     x    :   0 ,
+     y    :  50 ,
+     w    :  80 ,
+     h    :  32 ,
+    dx    : 100 , // pixels per second
+    color : '#ff0000',
+    previousMillis : 0
   };
 
   box.toggleColor = function() {
@@ -25,8 +26,10 @@ TODO: create 2 or more boxes whose colors can be individually toggled.
     }
   };
 
-  box.anim = function() {
-    this.x += this.dx;
+  box.anim = function(millis) {
+    let dt = (millis - this.previousMillis) / 1000.0;
+    this.previousMillis = millis;
+    this.x += this.dx * dt;
     if (this.x > canvas.width) this.x = 0;
     ctx.fillStyle = this.color;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -35,9 +38,8 @@ TODO: create 2 or more boxes whose colors can be individually toggled.
   };
 
   box.click = function(x, y) {
-    rect  = canvas.getBoundingClientRect();
-    x -= rect.left;
-    y -= rect.top;
+    x -= canvas.getBoundingClientRect().left;
+    y -= canvas.getBoundingClientRect().top;
     if (
       x > this.x            && 
       x < this.x + this.w   && 
