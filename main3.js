@@ -35,20 +35,24 @@ https://nicolahibbert.com/optimising-html5-canvas-games/
     ctx.fillRect(this.x, this.y, this.w, this.h);
   };
 
-  Box.prototype.mousedown = function(x, y) {
+  Box.prototype.mousedown = function(x, y, next) {
     if (
       x > this.x            && 
       x < this.x + this.w   && 
       y > this.y            && 
       y < this.y + this.h
-    )
-    this.toggleColor();
+    ) {
+      this.toggleColor();
+    } else if (next) {
+      next.mousedown(x, y);
+    }
   };
 
   /*
     Create game objects.
   */
-  let box = new Box(0, 50, 80, 32, 100, '#ff0000');
+  let box1 = new Box(0, 50, 80, 32, 100, '#ff0000');
+  let box2 = new Box(50, 150, 80, 16, 100, '#ff44AA');
 
   /*
      The simulation loop is a callback function that schedules itself
@@ -60,8 +64,10 @@ https://nicolahibbert.com/optimising-html5-canvas-games/
       let dt = (millis - previousMillis) / 1000.0;
       previousMillis = millis;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      box.update(dt);
-      box.draw();
+      box1.update(dt);
+      box2.update(dt);
+      box1.draw();
+      box2.draw();
       window.requestAnimationFrame(anim);
     }
     window.requestAnimationFrame(anim);
@@ -73,7 +79,7 @@ https://nicolahibbert.com/optimising-html5-canvas-games/
   function mousedown(e) {
     let x = e.clientX - canvas.getBoundingClientRect().left;
     let y = e.clientY - canvas.getBoundingClientRect().top;
-    box.mousedown(x, y);
+    box1.mousedown(x, y, box2);
   }
   canvas.addEventListener("mousedown", mousedown, false);
 
