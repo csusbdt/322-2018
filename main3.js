@@ -35,7 +35,7 @@ https://nicolahibbert.com/optimising-html5-canvas-games/
     ctx.fillRect(this.x, this.y, this.w, this.h);
   };
 
-  Box.prototype.mousedown = function(x, y, next) {
+  Box.prototype.mousedown = function(x, y) {
     if (
       x > this.x            && 
       x < this.x + this.w   && 
@@ -43,8 +43,9 @@ https://nicolahibbert.com/optimising-html5-canvas-games/
       y < this.y + this.h
     ) {
       this.toggleColor();
-    } else if (next) {
-      next.mousedown(x, y);
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -79,7 +80,8 @@ https://nicolahibbert.com/optimising-html5-canvas-games/
   function mousedown(e) {
     let x = e.clientX - canvas.getBoundingClientRect().left;
     let y = e.clientY - canvas.getBoundingClientRect().top;
-    box1.mousedown(x, y, box2);
+    box1.mousedown(x, y) || box2.mousedown(x, y);
+
   }
   canvas.addEventListener("mousedown", mousedown, false);
 
