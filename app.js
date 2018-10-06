@@ -25,6 +25,10 @@ app.fullscreen = function() {
   //canvas.mozRequestFullScreen();
   //canvas.msRequestFullscreen();
   //canvas.requestFullscreen();
+  setTimeout(function() {
+    app.canvas.width = document.body.clientWidth;
+    app.canvas.height = document.body.clientHeight;
+  }, 1000);
 };
 
 app.windowed = function() {

@@ -5,9 +5,12 @@
   function mousedown(e) {
     let x = e.clientX - app.canvas.getBoundingClientRect().left;
     let y = e.clientY - app.canvas.getBoundingClientRect().top;
-    // Need to redo this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //box1.mousedown(x, y) || box2.mousedown(x, y);
-    console.log('Need to finish this.');
+    for (var i = 0; i < app.objs.length; ++i) {
+      let o = app.objs[i];
+      if (o.mousedown(x, y)) {
+        return;
+      }
+    }
   }
 
   app.canvas.addEventListener("mousedown", mousedown, false);
