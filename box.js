@@ -9,7 +9,7 @@
     this.color = '#ff0000';
   }
 
-  app.Box.prototype = Object.create(app.Object);
+  app.Box.prototype = Object.create(app.Object.prototype);
   app.Box.prototype.constructor = app.Box;
 
   app.Box.prototype.toggleColor = function() {
