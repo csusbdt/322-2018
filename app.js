@@ -7,7 +7,7 @@ window.app = {};
 app.canvas  = document.getElementById('canvas');
 app.context = app.canvas.getContext('2d', { alpha: false });
 app.objs    = [];
-app.t       = 0; // time in seconds
+app.t       = 0; // time in seconds (duration into game)
 app.fps     = 30;
 
 document.getElementById('fullscreen').addEventListener(
@@ -21,21 +21,31 @@ document.getElementById('fullscreen').addEventListener(
 );
 
 app.fullscreen = function() {
-  app.canvas.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-  //canvas.mozRequestFullScreen();
-  //canvas.msRequestFullscreen();
-  //canvas.requestFullscreen();
-  setTimeout(function() {
-    app.canvas.width = document.body.clientWidth;
-    app.canvas.height = document.body.clientHeight;
-  }, 1000);
+  app.canvas.width  = document.body.clientWidth;
+  app.canvas.height = document.body.clientHeight;
+  if (app.canvas.webkitRequestFullscreen) {
+    app.canvas.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+  } else if (app.canvas.mozRequestFullScreen) {
+    canvas.mozRequestFullScreen();
+  } else if (app.canvas.msRequestFullScreen) {
+    canvas.msRequestFullscreen();
+  } else if (app.canvas.requestFullScreen) {
+    canvas.requestFullscreen();
+  } else {
+    console.log('Game will not play.');
+  }
 };
 
 app.windowed = function() {
-  document.webkitExitFullscreen();
-  //document.mozCancelFullScreen();
-  //document.msExitFullscreen();
-  //document.exitFullscreen();
+  if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
 };
  
 (function() {
