@@ -10,15 +10,30 @@ app.objs    = [];
 app.t       = 0; // time in seconds (duration into game)
 app.fps     = 30;
 
-document.getElementById('fullscreen').addEventListener(
-  "click", 
-  function() {
-    app.canvas.style.display = 'block';
+app.mousedown = function(e) {
+  // Convert screen coordinates to canvas coordinates.
+  let x = e.clientX - app.canvas.getBoundingClientRect().left;
+  let y = e.clientY - app.canvas.getBoundingClientRect().top;
+  // Inform all objects until one handles/captures the event.
+  for (var i = 0; i < app.objs.length; ++i) {
+    let o = app.objs[i];
+    if (o.mousedown(x, y)) {
+      return;
+    }
+  }
+}
+
+app.keydown = function(e) {
+  e = e || window.event;
+  if (e.key === 'f') {
     app.fullscreen();
-    document.getElementById('fullscreen').innerHTML = 'Fullscreen';
-  }, 
-  false
-);
+  }
+  if (e.key === 'r') {
+    console.log(app.fps);
+  }
+}
+
+
 
 app.fullscreen = function() {
   app.canvas.width  = document.body.clientWidth;
@@ -47,6 +62,19 @@ app.windowed = function() {
     document.exitFullscreen();
   }
 };
+
+document.getElementById('fullscreen').addEventListener(
+  "click", 
+  function() {
+    app.canvas.style.display = 'block';
+    app.fullscreen();
+    document.getElementById('fullscreen').innerHTML = 'Fullscreen';
+  }, 
+  false
+);
+
+window.addEventListener('keydown', app.keydown);
+app.canvas.addEventListener("mousedown", app.mousedown, false);
  
 (function() {
   function anim(millis) {
