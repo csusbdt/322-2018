@@ -33,8 +33,6 @@ app.keydown = function(e) {
   }
 }
 
-
-
 app.fullscreen = function() {
   app.canvas.width  = document.body.clientWidth;
   app.canvas.height = document.body.clientHeight;
@@ -63,6 +61,11 @@ app.windowed = function() {
   }
 };
 
+// Register event listeners.
+
+window.addEventListener('keydown', app.keydown);
+app.canvas.addEventListener("mousedown", app.mousedown, false);
+
 document.getElementById('fullscreen').addEventListener(
   "click", 
   function() {
@@ -73,9 +76,25 @@ document.getElementById('fullscreen').addEventListener(
   false
 );
 
-window.addEventListener('keydown', app.keydown);
-app.canvas.addEventListener("mousedown", app.mousedown, false);
+app.Object = function(){};
+app.Object.prototype.update = function(dt) {};
+app.Object.prototype.draw   = function(  ) {};
+
+app.Object.prototype.contains = function(x, y) {
+  if (x && y && this.x && this.y && this.w && this.h) {
+    return (
+      x > this.x           && 
+      x < this.x + this.w  && 
+      y > this.y           && 
+      y < this.y + this.h
+    );
+  } else {
+    return false;
+  }
+};
  
+// Simulation loop. 
+
 (function() {
   function anim(millis) {
     let t = millis / 1000.0; // convert time to seconds
