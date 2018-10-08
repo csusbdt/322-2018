@@ -20,7 +20,13 @@
       y > this.y           && 
       y < this.y + this.h
     );
-  }
+  };
+
+  app.Box.prototype.covers = function(o) {
+    return (
+      this.contains(o.x, o.y) && o.w < this.w && o.h < this.h
+    );
+  };
 
   app.Box.prototype.toggleColor = function() {
     if (this.color === '#ff0000') {
@@ -40,13 +46,13 @@
     app.context.fillRect(this.x, this.y, this.w, this.h);
   };
 
-  app.Box.prototype.mousedown = function(x, y) {
-    if (this.contains(x, y)) {
-      this.toggleColor();
-      return true;
-    }
-    return false;
-  };
+//  app.Box.prototype.mousedown = function(x, y) {
+//    if (this.contains(x, y)) {
+//      this.toggleColor();
+//      return true;
+//    }
+//    return false;
+//  };
 
 })();
 
