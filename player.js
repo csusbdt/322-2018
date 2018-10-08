@@ -1,5 +1,5 @@
 (function() {
-  app.player = new app.Box(0, 30, 200, 32,  90);
+  app.player = new app.Box(0, 30, 200, 32,  240);
   app.player.color = '#0000ff';
 
   app.player.update = function(dt) {

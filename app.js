@@ -72,9 +72,9 @@ app.windowed = function() {
 
 // Register event listeners.
 
-window.addEventListener('keydown', app.keydown);
-window.addEventListener('keyup'  , app.keyup  );
-app.canvas.addEventListener("mousedown", app.mousedown, false);
+window    .addEventListener('keydown'  , app.keydown  , false);
+window    .addEventListener('keyup'    , app.keyup    , false);
+app.canvas.addEventListener('mousedown', app.mousedown, false);
 
 document.getElementById('fullscreen').addEventListener(
   "click", 
