@@ -11,6 +11,7 @@ app.t       = 0; // time in seconds (duration into game)
 app.fps     = 30;
 
 app.mousedown = function(e) {
+  e = e || window.event;
   // Convert screen coordinates to canvas coordinates.
   let x = e.clientX - app.canvas.getBoundingClientRect().left;
   let y = e.clientY - app.canvas.getBoundingClientRect().top;
@@ -25,13 +26,21 @@ app.mousedown = function(e) {
 
 app.keydown = function(e) {
   e = e || window.event;
-  if (e.key === 'f') {
-    app.fullscreen();
-  }
-  if (e.key === 'r') {
-    console.log(app.fps);
-  }
-}
+       if (e.key === 'f') app.fullscreen();
+  else if (e.key === 'r') console.log(app.fps);
+  else if (e.key === 'a') app.aKeyDown = true;
+  else if (e.key === 'w') app.wKeyDown = true;
+  else if (e.key === 's') app.sKeyDown = true;
+  else if (e.key === 'd') app.dKeyDown = true;
+};
+
+app.keyup = function(e) {
+  e = e || window.event;
+       if (e.key === 'a') app.aKeyDown = false;
+  else if (e.key === 'w') app.wKeyDown = false;
+  else if (e.key === 's') app.sKeyDown = false;
+  else if (e.key === 'd') app.dKeyDown = false;
+};
 
 app.fullscreen = function() {
   app.canvas.width  = document.body.clientWidth;
@@ -64,6 +73,7 @@ app.windowed = function() {
 // Register event listeners.
 
 window.addEventListener('keydown', app.keydown);
+window.addEventListener('keyup'  , app.keyup  );
 app.canvas.addEventListener("mousedown", app.mousedown, false);
 
 document.getElementById('fullscreen').addEventListener(
@@ -77,8 +87,9 @@ document.getElementById('fullscreen').addEventListener(
 );
 
 app.Object = function(){};
-app.Object.prototype.update = function(dt) {};
-app.Object.prototype.draw   = function(  ) {};
+app.Object.prototype.update    = function(dt) {};
+app.Object.prototype.draw      = function(  ) {};
+app.Object.prototype.mousedown = function( e) { return false; };
 
 app.Object.prototype.contains = function(x, y) {
   if (x && y && this.x && this.y && this.w && this.h) {
@@ -108,5 +119,4 @@ app.Object.prototype.contains = function(x, y) {
   }
   window.requestAnimationFrame(anim);
 })();
-
 
