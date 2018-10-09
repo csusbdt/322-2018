@@ -17,10 +17,7 @@ app.mousedown = function(e) {
   let y = e.clientY - app.canvas.getBoundingClientRect().top;
   // Inform all objects until one handles/captures the event.
   for (var i = 0; i < app.objs.length; ++i) {
-    let o = app.objs[i];
-    if (o.mousedown(x, y)) {
-      return;
-    }
+    if (app.objs[i].mousedown(x, y)) break;
   }
 }
 
@@ -32,6 +29,10 @@ app.keydown = function(e) {
   else if (e.key === 'w') app.wKeyDown = true;
   else if (e.key === 's') app.sKeyDown = true;
   else if (e.key === 'd') app.dKeyDown = true;
+  // Inform all objects until one handles/captures the event.
+  for (var i = 0; i < app.objs.length; ++i) {
+    if (app.objs[i].keydown(e.key)) break;
+  }
 };
 
 app.keyup = function(e) {
@@ -87,22 +88,10 @@ document.getElementById('fullscreen').addEventListener(
 );
 
 app.Object = function(){};
-app.Object.prototype.update    = function(dt) {};
-app.Object.prototype.draw      = function(  ) {};
-app.Object.prototype.mousedown = function( e) { return false; };
-
-app.Object.prototype.contains = function(x, y) {
-  if (x && y && this.x && this.y && this.w && this.h) {
-    return (
-      x > this.x           && 
-      x < this.x + this.w  && 
-      y > this.y           && 
-      y < this.y + this.h
-    );
-  } else {
-    return false;
-  }
-};
+app.Object.prototype.update    = function( dt) {};
+app.Object.prototype.draw      = function(   ) {};
+app.Object.prototype.mousedown = function( e ) { return false; };
+app.Object.prototype.keydown   = function(key) { return false; };
  
 // Simulation loop. 
 

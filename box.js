@@ -12,6 +12,15 @@
   app.Box.prototype = Object.create(app.Object.prototype);
   app.Box.prototype.constructor = app.Box;
 
+  app.Object.prototype.contains = function(x, y) {
+    return (
+      x > this.x           && 
+      x < this.x + this.w  && 
+      y > this.y           && 
+      y < this.y + this.h
+    );
+  };
+
   app.Box.prototype.toggleColor = function() {
     if (this.color === '#ff0000') {
       this.color = '#00ff00';

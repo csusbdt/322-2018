@@ -17,8 +17,13 @@
     } 
   }
 
+  // not sure i need this:
   app.player.mousedown = function(x, y) {
     return false;
+  };
+
+  app.player.keydown = function(key) {
+    console.log(key);
   };
 
 })();
