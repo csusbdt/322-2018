@@ -23,7 +23,7 @@
   };
 
   app.player.keydown = function(key) {
-    console.log(key);
+    if (key === ' ') console.log('space');
   };
 
 })();
