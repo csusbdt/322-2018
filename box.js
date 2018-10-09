@@ -12,12 +12,19 @@
   app.Box.prototype = Object.create(app.Object.prototype);
   app.Box.prototype.constructor = app.Box;
 
-  app.Object.prototype.contains = function(x, y) {
+  app.Box.prototype.contains = function(x, y) {
     return (
       x > this.x           && 
       x < this.x + this.w  && 
       y > this.y           && 
       y < this.y + this.h
+    );
+  };
+
+  app.Box.prototype.covers = function(o) {
+    return (
+      this.contains(o.x      , o.y      )  && 
+      this.contains(o.x + o.w, o.y + o.h) 
     );
   };
 
@@ -37,14 +44,6 @@
   app.Box.prototype.draw = function() {
     app.context.fillStyle = this.color;
     app.context.fillRect(this.x, this.y, this.w, this.h);
-  };
-
-  app.Box.prototype.mousedown = function(x, y) {
-    if (this.contains(x, y)) {
-      this.toggleColor();
-      return true;
-    }
-    return false;
   };
 
 })();
