@@ -23,12 +23,16 @@ app.mousedown = function(e) {
 
 app.keydown = function(e) {
   e = e || window.event;
-       if (e.key === 'f') app.fullscreen();
-  else if (e.key === 'r') console.log(app.fps);
-  else if (e.key === 'a') app.aKeyDown = true;
-  else if (e.key === 'w') app.wKeyDown = true;
-  else if (e.key === 's') app.sKeyDown = true;
-  else if (e.key === 'd') app.dKeyDown = true;
+       if (e.key === 'f'         ) app.fullscreen();
+  else if (e.key === 'r'         ) console.log(app.fps);
+  else if (e.key === 'a'         ) app.aKeyDown       = true;
+  else if (e.key === 'w'         ) app.wKeyDown       = true;
+  else if (e.key === 's'         ) app.sKeyDown       = true;
+  else if (e.key === 'd'         ) app.dKeyDown       = true;
+  else if (e.key === 'ArrowLeft' ) app.leftArrowDown  = true;
+  else if (e.key === 'ArrowUp'   ) app.upArrowDown    = true;
+  else if (e.key === 'ArrowDown' ) app.downArrowDown  = true;
+  else if (e.key === 'ArrowRight') app.rightArrowDown = true;
   // Inform all objects until one handles/captures the event.
   for (var i = 0; i < app.objs.length; ++i) {
     if (app.objs[i].keydown(e.key)) break;
@@ -37,10 +41,14 @@ app.keydown = function(e) {
 
 app.keyup = function(e) {
   e = e || window.event;
-       if (e.key === 'a') app.aKeyDown = false;
-  else if (e.key === 'w') app.wKeyDown = false;
-  else if (e.key === 's') app.sKeyDown = false;
-  else if (e.key === 'd') app.dKeyDown = false;
+       if (e.key === 'a'         ) app.aKeyDown       = false;
+  else if (e.key === 'w'         ) app.wKeyDown       = false;
+  else if (e.key === 's'         ) app.sKeyDown       = false;
+  else if (e.key === 'd'         ) app.dKeyDown       = false;
+  else if (e.key === 'ArrowLeft' ) app.leftArrowDown  = false;
+  else if (e.key === 'ArrowUp'   ) app.upArrowDown    = false;
+  else if (e.key === 'ArrowDown' ) app.downArrowDown  = false;
+  else if (e.key === 'ArrowRight') app.rightArrowDown = false;
 };
 
 app.fullscreen = function() {
@@ -88,10 +96,10 @@ document.getElementById('fullscreen').addEventListener(
 );
 
 app.Object = function(){};
-app.Object.prototype.update    = function( dt) {};
-app.Object.prototype.draw      = function(   ) {};
-app.Object.prototype.mousedown = function( e ) { return false; };
-app.Object.prototype.keydown   = function(key) { return false; };
+app.Object.prototype.update    = function( dt ) {};
+app.Object.prototype.draw      = function(    ) {};
+app.Object.prototype.mousedown = function(x, y) { return false; };
+app.Object.prototype.keydown   = function( key) { return false; };
  
 // Simulation loop. 
 
@@ -102,8 +110,8 @@ app.Object.prototype.keydown   = function(key) { return false; };
     app.fps = app.fps * .99 + 1.0 / dt * .01;
     app.t = t; // update the current time in the app object
     app.context.clearRect(0, 0, app.canvas.width, app.canvas.height);
-    app.objs.forEach(function(o) { o.update(dt); });
-    app.objs.forEach(function(o) { o.draw()    ; });
+    for (let i = 0; i < app.objs.length; ++i) app.objs[i].update(dt);
+    for (let i = 0; i < app.objs.length; ++i) app.objs[i].draw();
     window.requestAnimationFrame(anim);
   }
   window.requestAnimationFrame(anim);

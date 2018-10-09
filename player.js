@@ -1,25 +1,21 @@
 (function() {
-  app.player = new app.Box(0, 30, 200, 32,  240);
+  app.player = new app.Box(0, 30, 200, 48,  240);
   app.player.color = '#0000ff';
 
   app.player.update = function(dt) {
-    if (app.aKeyDown) {
+    if (app.aKeyDown || app.leftArrowDown) {
       this.x -= this.dx * dt;
     } 
-    if (app.dKeyDown) {
+    if (app.dKeyDown || app.rightArrowDown) {
       this.x += this.dx * dt;
     } 
-    if (app.wKeyDown) {
+    if (app.wKeyDown || app.upArrowDown) {
       this.y -= this.dx * dt;
     } 
-    if (app.sKeyDown) {
+    if (app.sKeyDown || app.downArrowDown) {
       this.y += this.dx * dt;
     } 
   }
-
-  app.player.keydown = function(key) {
-    if (key === ' ') console.log('space');
-  };
 
 })();
 

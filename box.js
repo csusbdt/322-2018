@@ -1,19 +1,18 @@
 (function() {
   app.Box = function(x, y, w, h, dx, color) {
     app.Object.call(this);
-    this.x     =     x | 0;
-    this.y     =     y | 0;
-    this.w     =     w | 0;
-    this.h     =     h | 0;
-    this.dx    =    dx | 0;
-    this.color = color | '#ff0000';
+    this.x     =     x || 0;
+    this.y     =     y || 0;
+    this.w     =     w || 0;
+    this.h     =     h || 0;
+    this.dx    =    dx || 0;
+    this.color = color || '#ff0000';
   }
 
   app.Box.prototype = Object.create(app.Object.prototype);
   app.Box.prototype.constructor = app.Box;
 
   app.Box.prototype.contains = function(x, y) {
-    if (! o instanceof app.Box) return false;
     return (
       x > this.x           && 
       x < this.x + this.w  && 
@@ -36,8 +35,8 @@
   }
 
   app.Box.prototype.draw = function() {
-    app.context.fillStyle = this.color;
-    app.context.fillRect(this.x, this.y, this.w, this.h);
+    app.context.strokeStyle = this.color;
+    app.context.strokeRect(this.x, this.y, this.w, this.h);
   };
 
 })();
