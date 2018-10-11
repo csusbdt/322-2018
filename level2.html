@@ -1,0 +1,43 @@
+<h1>Game Project</h1>
+
+<button id="fullscreen">Play</button>
+
+<canvas id="canvas" style="display: none;"></canvas>
+
+<script src="app.js"    ></script>
+<script src="box.js"    ></script>
+<script src="enemy.js"  ></script>
+<script src="player.js" ></script>
+
+<script>
+(function() {
+
+  let ai = new app.Object();
+
+  ai.update = function(dt) {
+    let win = true;
+    for (let i = 0; i < app.objs.length; ++i) {
+      let o = app.objs[i];
+      if (o instanceof app.Enemy && o.isLiving()) win = false;
+    }
+    if (win) {
+      document.body.innerHTML = '';
+      var node = document.createElement("p");
+      var textnode = document.createTextNode("Game Over.");
+      node.appendChild(textnode);
+      document.body.appendChild(node);
+    }
+  }
+
+  while (app.objs.length > 0) app.objs.pop();
+
+  app.objs.push(new app.Enemy( 64,  97, 32, 32, 100) );
+  app.objs.push(new app.Enemy( 40,  75, 16, 16, 120) );
+  app.objs.push(new app.Enemy(140, 115, 24, 24, 200) );
+  app.objs.push(app.player                           );
+  app.objs.push(ai                                   );
+
+})();
+
+</script>
+
