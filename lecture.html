@@ -1,0 +1,37 @@
+<h1>Javascript Lecture on Inheritance</h1>
+
+<script>
+function assert(e) {
+  if (!eval(e)) {
+    let msg = '<p>Assertion failed: ' + e + '</p>';
+    document.write(msg);
+    console.log(msg);
+  }
+}
+
+function P() {}
+P.prototype.g = function() { document.write('<p>P.g()</p>'); }
+
+function O(a, b) {
+  P.call(this); // does nothing in this example 
+  this.a = a;
+  this.b = b;
+}
+
+O.prototype = Object.create(P.prototype); // new P();
+O.prototype.constructor = O;
+
+O.prototype.f = function() { document.write('<p>O.f()</p>'); }
+
+let o = new O(1, 2);
+
+o.f(); // writes <p>O.f()</p>
+o.g(); // writes <p>P.g()</p>
+
+assert('Object.getPrototypeOf(o) === O.prototype'); 
+assert('o.constructor === O');
+
+assert('O.prototype.__proto__ === P.prototype');
+</script>
+
+

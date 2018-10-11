@@ -1,0 +1,17 @@
+# Quiz Questions
+
+The property with the name _prototype_ is automatically
+attached to what type of objects?  Describe how it is
+automatically attached.
+
+What is the name of the property that refers to an
+objects's prototype?
+
+
+The prototype of an object is a:
+a) class
+b) object
+c) function
+d) figure of speech
+
+
