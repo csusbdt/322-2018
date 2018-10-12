@@ -1,5 +1,6 @@
-/*
 (function() {
+
+  // Duplicate code to re-org:
 
   let ai = new g.Object();
 
@@ -10,11 +11,7 @@
       if (o instanceof g.Enemy && o.isLiving()) win = false;
     }
     if (win) {
-      document.body.innerHTML = '';
-      var node = document.createElement("p");
-      var textnode = document.createTextNode("Win!");
-      node.appendChild(textnode);
-      document.body.appendChild(node);
+      g.loadScript('level2.js');
     }
   }
 
@@ -25,6 +22,4 @@
   g.objs.push( ai                               );
 
 })();
-*/
-g.loadScript('level1.js');
 

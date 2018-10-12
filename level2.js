@@ -1,5 +1,6 @@
-/*
 (function() {
+
+  // Duplicate code to re-org:
 
   let ai = new g.Object();
 
@@ -19,12 +20,11 @@
   }
 
   g.clear();
-  g.objs.push( new g.Enemy( 0, 30, 80, 32,  90) );
-  g.objs.push( new g.Enemy(50, 75, 80, 16, 190) );
-  g.objs.push( g.player                         );
-  g.objs.push( ai                               );
+  g.objs.push( new g.Enemy( 64,  97, 32, 32, 100) );
+  g.objs.push( new g.Enemy( 40,  75, 16, 16, 120) );
+  g.objs.push( new g.Enemy(140, 115, 24, 24, 200) );
+  g.objs.push( g.player                           );
+  g.objs.push( ai                                 );
 
 })();
-*/
-g.loadScript('level1.js');
 
