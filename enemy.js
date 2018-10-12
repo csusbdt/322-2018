@@ -1,29 +1,29 @@
 (function() {
-  app.Enemy = function(x, y, w, h, dx) {
-    app.Box.call(this, x, y, w, h, dx, '#00ff00');
+  g.Enemy = function(x, y, w, h, dx) {
+    g.Box.call(this, x, y, w, h, dx, '#00ff00');
   };
 
-  app.Enemy.prototype = Object.create(app.Box.prototype);
-  app.Enemy.prototype.constructor = app.Enemy;
+  g.Enemy.prototype = Object.create(g.Box.prototype);
+  g.Enemy.prototype.constructor = g.Enemy;
 
-  app.Enemy.prototype.isLiving = function() {
+  g.Enemy.prototype.isLiving = function() {
     return this.color === '#00ff00';
   };
 
-  app.Enemy.prototype.update = function(dt) {
+  g.Enemy.prototype.update = function(dt) {
     this.x += this.dx * dt;
-    if (this.x > app.canvas.width) this.x = -this.w;
+    if (this.x > g.canvas.width) this.x = -this.w;
   };
 
-  app.Enemy.prototype.keydown = function(key) {
-    if (key === ' ' && app.player.covers(this)) {
+  g.Enemy.prototype.keydown = function(key) {
+    if (key === ' ' && g.player.covers(this)) {
       this.color = '#ff0000';
     }
   };
 
-  app.Enemy.prototype.draw = function() {
-    app.context.fillStyle = this.color;
-    app.context.fillRect(this.x, this.y, this.w, this.h);
+  g.Enemy.prototype.draw = function() {
+    g.context.fillStyle = this.color;
+    g.context.fillRect(this.x, this.y, this.w, this.h);
   };
 
 })();
