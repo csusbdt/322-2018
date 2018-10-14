@@ -11,10 +11,10 @@
       if (o instanceof g.Enemy && o.isLiving()) win = false;
     }
     if (win) {
+      g.context.font = '48px serif';
       let w = g.context.measureText(this.text).width;
       let x = g.canvas.width / 2 - .5 * w;
-      let y = g.canvas.height / 2;
-x = 200; y = 200;
+      let y = g.canvas.height / 2 - 15;
       let text = new g.Text('48px serif', x, y, 'Winner!');
       g.clear();
       g.objs.push(text);
