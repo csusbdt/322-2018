@@ -1,21 +1,24 @@
 (function() {
 
-  // Duplicate code to re-org:
-
   let ai = new g.Object();
+  ai.win = false;
 
   ai.update = function(dt) {
+    if (this.win) return;
     let win = true;
     for (let i = 0; i < g.objs.length; ++i) {
       let o = g.objs[i];
       if (o instanceof g.Enemy && o.isLiving()) win = false;
     }
     if (win) {
-      document.body.innerHTML = '';
-      var node = document.createElement("p");
-      var textnode = document.createTextNode("Win!");
-      node.appendChild(textnode);
-      document.body.appendChild(node);
+      let w = g.context.measureText(this.text).width;
+      let x = g.canvas.width / 2 - .5 * w;
+      let y = g.canvas.height / 2;
+x = 200; y = 200;
+      let text = new g.Text('48px serif', x, y, 'Winner!');
+      g.clear();
+      g.objs.push(text);
+      this.win = true;
     }
   }
 
