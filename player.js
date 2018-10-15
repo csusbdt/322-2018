@@ -1,6 +1,6 @@
 (function() {
   g.player = new g.Box(0, 30, 200, 48,  240);
-  g.player.color = '#0000ff';
+  g.player.color = '#ffffff';
 
   g.player.update = function(dt) {
     if (g.aKeyDown || g.leftArrowDown) {

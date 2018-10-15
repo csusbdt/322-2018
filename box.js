@@ -28,10 +28,10 @@ g.Box.prototype.covers = function(o) {
   );
 };
 
-g.Box.prototype.update = function(dt) {
-  this.x += this.dx * dt;
-  if (this.x > g.canvas.width) this.x = -this.w;
-};
+//g.Box.prototype.update = function(dt) {
+//  this.x += this.dx * dt;
+//  if (this.x > g.canvas.width) this.x = -this.w;
+//};
 
 g.Box.prototype.draw = function() {
   g.context.strokeStyle = this.color;
