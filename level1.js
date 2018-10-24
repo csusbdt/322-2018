@@ -16,8 +16,8 @@
   }
 
   g.clear();
-  g.objs.push( new g.Enemy( 0, 30, 80, 32,  90) );
-  g.objs.push( new g.Enemy(50, 75, 80, 16, 190) );
+  g.objs.push( new g.Enemy( 0, 30, 30, 32,  90) );
+  g.objs.push( new g.Enemy(50, 75, 30, 16, 190) );
   g.objs.push( g.player                         );
   g.objs.push( ai                               );
 
