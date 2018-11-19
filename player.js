@@ -1,8 +1,12 @@
 (function() {
   g.player = new g.Box(0, 30, 130, 130, 200);
   g.player.walkFrames = [
-    { x: 0, y: 0 },  { x: 130, y: 0 },  { x: 0, y: 130 },  { x: 130, y: 130 }
+    { x:   0, y:   0 },
+    { x: 130, y:   0 },
+    { x:   0, y: 130 },
+    { x: 130, y: 130 }
   ];
+
   g.player.frameIndex = 0;
   g.player.frameDuration = .1;
   g.player.timeToNextFrame = g.player.frameDuration;
