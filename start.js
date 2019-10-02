@@ -84,7 +84,7 @@ window.addEventListener(
   function(e) {
     e = e || window.event;
          if (e.key === 'f'         ) g.fullscreen();
-    else if (e.key === 'r'         ) console.log(app.fps);
+    else if (e.key === 'r'         ) console.log(g.fps);
     else if (e.key === 'a'         ) g.aKeyDown       = true;
     else if (e.key === 'w'         ) g.wKeyDown       = true;
     else if (e.key === 's'         ) g.sKeyDown       = true;
